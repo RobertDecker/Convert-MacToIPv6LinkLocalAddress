@@ -8,6 +8,10 @@ Function Convert-MacToIPv6LinkLocalAddress {
         Converts a MAC address to an IPv6 Link Local addressy
     .PARAMETER MacAddress
         MAC Address to convert
+    .PARAMETER Interface
+        Optional Interface of link local address
+    .Parameter EncloseInBrackets
+        Optionally enclose the output with square brackets
     .EXAMPLE
         . .\Convert-MacToIPv6LinkLocalAddress
         $IPv6LinkLocalAddress = Convert-MacToIPv6LinkLocalAddress -MacAddress 'a4:bf:01:7b:86:4a'
@@ -17,6 +21,12 @@ Function Convert-MacToIPv6LinkLocalAddress {
     .EXAMPLE
         . .\Convert-MacToIPv6LinkLocalAddress
         $IPv6LinkLocalAddress = Convert-MacToIPv6LinkLocalAddress -MacAddress 'a4:bf:01:7b:86:4a' -Interface 'eth0'
+        $IPv6LinkLocalAddress
+        fe80::a6bf:1ff:fe7b:864a%eth0
+    .EXAMPLE
+        . .\Convert-MacToIPv6LinkLocalAddress
+        Convert-MacToIPv6LinkLocalAddress -MacAddress 'a4:bf:01:7b:86:4a' -Interface 'eth0' -EncloseInBrackets $true
+        [fe80::a6bf:1ff:fe7b:864a%eth0]
     .NOTES
         - Dot source the script.
         - MacAddress will accept any of the following formats:  "XX:XX:XX:XX:XX:XX", "XXXX:XXXX:XXXX", "XXXXXX:XXXXXX", "XXXXXXXXXXXX" where the delimiter, if used, must be either a dot, hyphen, or colon.
@@ -26,6 +36,7 @@ Function Convert-MacToIPv6LinkLocalAddress {
         License:            GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
        
         Changelog:
+            1.0.1           Added EncloseInBrackets functionality
             1.0.0           Initial Release
     #>
 
@@ -35,7 +46,10 @@ Function Convert-MacToIPv6LinkLocalAddress {
         [String]$MacAddress,
 
         [Parameter(Mandatory = $false, Position = 1)]
-        [String]$Interface
+        [String]$Interface,
+
+        [Parameter(Mandatory = $false, Position = 2)]
+        [bool]$EncloseInBrackets = $false
     )
 
     # Remove delimiters
@@ -56,12 +70,15 @@ Function Convert-MacToIPv6LinkLocalAddress {
     $Hextet3 = ($MacAddressBytes[2].ToString("X2") + $MacAddressBytes[3].ToString("X2")) -replace "^0" -replace "^0" -replace "^0"
     $Hextet4 = ($MacAddressBytes[0].ToString("X2") + $MacAddressBytes[1].ToString("X2")) -replace "^0" -replace "^0" -replace "^0"
 
+    # Construct the full IPv6 Link Local Address
     $IPv6LinkLocalAddress = ("fe80::" + $Hextet4 + ":" + $Hextet3 + ":" + $Hextet2 + ":" + $Hextet1).ToLower()
-    # Output the MAC address properly converted and formatted into an IPv6 link local address.
-    if ($Interface) {
-        $IPv6LinkLocalAddress + "%" + $Interface
-    }
-    else {
-        $IPv6LinkLocalAddress
-    }
+    
+    # Add the interface designation if specified
+    if ($Interface) { $IPv6LinkLocalAddress = $IPv6LinkLocalAddress + "%" + $Interface }
+
+    # Enclose in square brackets if specified
+    if ($EncloseInBrackets) { $IPv6LinkLocalAddress = '[' + $IPv6LinkLocalAddress + ']' }
+
+    # Produce the output
+    $IPv6LinkLocalAddress
 }
