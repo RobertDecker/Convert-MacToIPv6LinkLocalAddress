@@ -35,5 +35,10 @@ PS> . .\Convert-MacToIPv6LinkLocalAddress.ps1
 PS> "a4:bf:01:7b:86:4a" | Convert-MacToIPv6LinkLocalAddress  -Interface "eth0"
 fe80::a6bf:1ff:fe7b:864a%eth0
 ```
+```powershell
+PS> . .\Convert-MacToIPv6LinkLocalAddress.ps1
+PS> "a4:bf:01:7b:86:4a" | Convert-MacToIPv6LinkLocalAddress  -Interface "eth0" -EncloseInBrackets $true
+[fe80::a6bf:1ff:fe7b:864a%eth0]
+```
 ## License
 This software is licensed under the GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007.
