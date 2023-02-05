@@ -29,15 +29,19 @@ Function Convert-MacToIPv6LinkLocalAddress {
         [fe80::a6bf:1ff:fe7b:864a%eth0]
     .NOTES
         - Dot source the script.
-        - MacAddress will accept any of the following formats:  'XX:XX:XX:XX:XX:XX', 'XXXX:XXXX:XXXX', 'XXXXXX:XXXXXX', 'XXXXXXXXXXXX' where the delimiter, if used, must be either a dot, hyphen, or colon.
+        - MacAddress will accept any of the following formats:  'XX:XX:XX:XX:XX:XX', 'XXXX:XXXX:XXXX', 'XXXXXX:XXXXXX', 'XXXXXXXXXXXX' 
+            where the delimiter, if used, must be either a dot, hyphen, or colon.
     .NOTES
         Author:             Robert Decker
         Email:              rdecker@cybernorth.com
         License:            GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
        
         Changelog:
-            1.0.2   2023-02-04  Consistent use of qoutes.  Simplification of hextet leading zero trimming and MAC address to byte array conversion.
+            1.0.2   2023-02-04  Consistent use of qoutes.  Simplification of hextet leading zero trimming and 
+                MAC address to byte array conversion.
+            
             1.0.1   2023-02-03  Added EncloseInBrackets functionality
+            
             1.0.0   2023-02-02  Initial Release
     #>
 
