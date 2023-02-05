@@ -36,9 +36,9 @@ Function Convert-MacToIPv6LinkLocalAddress {
         License:            GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
        
         Changelog:
-            1.0.2           Consistent use of qoutes.  Simplification of hextet leading zero trimming and MAC address to byte array conversion.
-            1.0.1           Added EncloseInBrackets functionality
-            1.0.0           Initial Release
+            1.0.2   2023-02-04  Consistent use of qoutes.  Simplification of hextet leading zero trimming and MAC address to byte array conversion.
+            1.0.1   2023-02-03  Added EncloseInBrackets functionality
+            1.0.0   2023-02-02  Initial Release
     #>
 
     Param(
