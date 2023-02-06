@@ -10,7 +10,7 @@ Function Convert-MacToIPv6LinkLocalAddress {
         MAC Address to convert
     .PARAMETER Interface
         Optional Interface of link local address
-    .Parameter EncloseInBrackets
+    .PARAMETER EncloseInBrackets
         Optionally enclose the output with square brackets
     .EXAMPLE
         . .\Convert-MacToIPv6LinkLocalAddress
